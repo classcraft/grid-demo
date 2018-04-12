@@ -1,28 +1,91 @@
 .App {
+  display: grid;
+  grid-template-rows: 100px 1fr repeat(2, min-content);
+  grid-template-columns: 3fr minmax(200px, 1fr);
+  grid-template-areas:
+    "header header"
+    "main sidebar"
+    "nav nav"
+    "footer footer";
   text-align: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+@media (min-width: 1024px) {
+  .App {
+    grid-template-rows: 100px 1fr min-content;
+    grid-template-columns: min-content 3fr minmax(200px, 1fr);
+    grid-template-areas:
+      "header header header"
+      "nav main sidebar"
+      "footer footer footer";
+  }
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+header,
+nav,
+main,
+aside,
+footer {
+  outline: 1px solid #ddd;
+  padding: 2rem;
 }
 
-.App-title {
-  font-size: 1.5em;
+header {
+  grid-area: header;
 }
 
-.App-intro {
-  font-size: large;
+nav {
+  grid-area: nav;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  white-space: nowrap;
+}
+
+main {
+  display: grid;
+  grid-area: main;
+  grid-gap: 2rem 1rem;
+  grid-template-rows: auto;
+  grid-template-columns: [start] 1fr [end] 2fr;
+  overflow: scroll;
+}
+
+@media (min-width: 1024px) {
+  main {
+    grid-template-columns: [start] 1fr 2fr [end];
+  }
+}
+
+span {
+  grid-row: auto;
+  grid-column-start: start;
+  grid-column-end: end;
+  background-color: red;
+  width: 100%;
+  height: 1px;
+}
+
+aside {
+  grid-area: sidebar;
+}
+
+footer {
+  grid-area: footer;
+}
+
+section {
+  border: 1px solid #ddd;
+  padding: 1rem;
 }
